@@ -19,10 +19,9 @@ var FEDORA_CUSTOM_MIRRORS = []string{}
 var BUILDIN_FEDORA_MIRRORS = GenerateBuildInList(FEDORA_OFFICIAL_MIRRORS, FEDORA_CUSTOM_MIRRORS)
 
 var FEDORA_DEFAULT_CACHE_RULES = []Rule{
-	{Pattern: regexp.MustCompile(`repomd.xml$`), CacheControl: `max-age=3600`, Rewrite: true, OS: TYPE_LINUX_DISTROS_FEDORA},
-	{Pattern: regexp.MustCompile(`filelist.gz$`), CacheControl: `max-age=3600`, Rewrite: true, OS: TYPE_LINUX_DISTROS_FEDORA},
-	{Pattern: regexp.MustCompile(`dir_sizes$`), CacheControl: `max-age=3600`, Rewrite: true, OS: TYPE_LINUX_DISTROS_FEDORA},
-	{Pattern: regexp.MustCompile(`TIME$`), CacheControl: `max-age=3600`, Rewrite: true, OS: TYPE_LINUX_DISTROS_FEDORA},
-	{Pattern: regexp.MustCompile(`timestamp.txt$`), CacheControl: `max-age=3600`, Rewrite: true, OS: TYPE_LINUX_DISTROS_FEDORA},
-	{Pattern: regexp.MustCompile(`.*`), CacheControl: `max-age=100000`, Rewrite: true, OS: TYPE_LINUX_DISTROS_FEDORA},
+	{Pattern: regexp.MustCompile(`repodata/.*\.(xml|xml.gz|xml.xz|json)$`), CacheControl: `max-age=3600`, Rewrite: true, OS: TYPE_LINUX_DISTROS_FEDORA},
+	{Pattern: regexp.MustCompile(`repodata/.*\.(zck|zst)$`), CacheControl: ``, Rewrite: false, OS: TYPE_LINUX_DISTROS_FEDORA},
+	{Pattern: regexp.MustCompile(`Packages/.*\.rpm$`), CacheControl: `max-age=86400`, Rewrite: true, OS: TYPE_LINUX_DISTROS_FEDORA},
+	{Pattern: regexp.MustCompile(`.*timestamp.txt$`), CacheControl: `max-age=3600`, Rewrite: true, OS: TYPE_LINUX_DISTROS_FEDORA},
+	{Pattern: regexp.MustCompile(`.*`), CacheControl: `max-age=3600`, Rewrite: true, OS: TYPE_LINUX_DISTROS_FEDORA},
 }
