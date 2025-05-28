@@ -9,8 +9,6 @@ const FEDORA_BENCHMAKR_URL = "TIME"
 // https://mirrors.fedoraproject.org/ 2022.11.19
 // Official Fedora mirrors
 var FEDORA_OFFICIAL_MIRRORS = []string{
-	"https://download.fedoraproject.org/pub/fedora/linux/",
-	"https://mirror.ufs.ac.za/fedora/",
 	"http://ftp.nluug.nl/pub/os/Linux/distr/fedora/",
 }
 
