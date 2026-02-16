@@ -28,6 +28,8 @@ dockers:
     goarch: amd64
     build_flag_templates:
       - "--pull"
+      - "--provenance=false"
+      - "--sbom=false"
       - "--platform=linux/amd64"
       - "--label=org.opencontainers.image.title={{ .ProjectName }}"
       - "--label=org.opencontainers.image.description={{ .ProjectName }}"
@@ -48,6 +50,8 @@ dockers:
     goarm: ''
     build_flag_templates:
       - "--pull"
+      - "--provenance=false"
+      - "--sbom=false"
       - "--platform=linux/arm64"
       - "--label=org.opencontainers.image.title={{ .ProjectName }}"
       - "--label=org.opencontainers.image.description={{ .ProjectName }}"
@@ -68,6 +72,8 @@ dockers:
     goarm: "7"
     build_flag_templates:
       - "--pull"
+      - "--provenance=false"
+      - "--sbom=false"
       - "--platform=linux/arm/v7"
       - "--label=org.opencontainers.image.title={{ .ProjectName }}"
       - "--label=org.opencontainers.image.description={{ .ProjectName }}"
