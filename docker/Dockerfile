@@ -1,4 +1,4 @@
-FROM golang:1.23-alpine3.21 AS builder
+FROM golang:1.25-alpine AS builder
 RUN apk update && \
     apk add --no-cache ca-certificates tzdata
 ARG TZ=Asia/Shanghai
@@ -22,6 +22,9 @@ ARG TZ=Asia/Shanghai
 ENV TZ=${TZ}
 RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 COPY --from=builder /build/apt-proxy /usr/bin/apt-proxy
+# Copy distributions config
+RUN mkdir -p /etc/apt-proxy
+COPY --from=builder /build/config/distributions.yaml /etc/apt-proxy/distributions.yaml
 # Create cache directory with proper permissions
 RUN mkdir -p /var/cache/apt-proxy && chown aptproxy:aptproxy /var/cache/apt-proxy
 USER aptproxy

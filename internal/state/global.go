@@ -86,6 +86,9 @@ type AppState struct {
 	Debian      *MirrorState
 	CentOS      *MirrorState
 	Alpine      *MirrorState
+	// dynamic holds mirror states for YAML-loaded distros (types not in built-in set)
+	dynamic   map[int]*MirrorState
+	dynamicMu sync.RWMutex
 }
 
 // NewAppState creates a new AppState instance with initialized mirror states
@@ -96,6 +99,7 @@ func NewAppState() *AppState {
 		Debian:      NewMirrorState(distro.TYPE_LINUX_DISTROS_DEBIAN),
 		CentOS:      NewMirrorState(distro.TYPE_LINUX_DISTROS_CENTOS),
 		Alpine:      NewMirrorState(distro.TYPE_LINUX_DISTROS_ALPINE),
+		dynamic:     make(map[int]*MirrorState),
 	}
 }
 
@@ -126,6 +130,15 @@ func (s *AppState) SetMirror(distType int, input string) {
 		s.CentOS.Set(input)
 	case distro.TYPE_LINUX_DISTROS_ALPINE:
 		s.Alpine.Set(input)
+	default:
+		s.dynamicMu.Lock()
+		ms, ok := s.dynamic[distType]
+		if !ok {
+			ms = NewMirrorState(distType)
+			s.dynamic[distType] = ms
+		}
+		s.dynamicMu.Unlock()
+		ms.Set(input)
 	}
 }
 
@@ -143,6 +156,12 @@ func (s *AppState) GetMirror(distType int) *url.URL {
 	case distro.TYPE_LINUX_DISTROS_ALPINE:
 		return s.Alpine.Get()
 	default:
+		s.dynamicMu.RLock()
+		ms, ok := s.dynamic[distType]
+		s.dynamicMu.RUnlock()
+		if ok {
+			return ms.Get()
+		}
 		return nil
 	}
 }

@@ -1,35 +1,3 @@
-# apt-proxy distributions configuration
-# Add or edit distributions and mirrors here. Reload with SIGHUP or POST /api/mirrors/refresh.
-# If mirrors.official/custom are empty for a distribution, built-in mirrors are used for that dist.
-#
-# distributions:
-#   - id: ubuntu
-#     name: Ubuntu
-#     type: 1
-#     url_pattern: "/ubuntu/(.+)$"
-#     benchmark_url: "dists/noble/main/binary-amd64/Release"
-#     geo_mirror_api: "http://mirrors.ubuntu.com/mirrors.txt"
-#     cache_rules:
-#       - pattern: "deb$"
-#         cache_control: "max-age=100000"
-#         rewrite: true
-#       - pattern: "InRelease$"
-#         cache_control: "max-age=3600"
-#         rewrite: true
-#     mirrors:
-#       official:
-#         - "mirrors.tuna.tsinghua.edu.cn/ubuntu/"
-#         - "mirrors.ustc.edu.cn/ubuntu/"
-#       custom:
-#         - "mirrors.163.com/ubuntu/"
-#     aliases:
-#       tsinghua: "mirrors.tuna.tsinghua.edu.cn/ubuntu/"
-#       ustc: "mirrors.ustc.edu.cn/ubuntu/"
-#       aliyun: "mirrors.aliyun.com/ubuntu/"
-#       tencent: "mirrors.cloud.tencent.com/ubuntu/"
-#       163: "mirrors.163.com/ubuntu/"
-#       huaweicloud: "mirrors.huaweicloud.com/repository/ubuntu/"
-
 distributions:
   - id: ubuntu
     name: Ubuntu
@@ -73,28 +41,16 @@ distributions:
         rewrite: true
     mirrors:
       official:
-        - "mirrors.cn99.com/ubuntu/"
-        - "mirrors.tuna.tsinghua.edu.cn/ubuntu/"
-        - "mirrors.ustc.edu.cn/ubuntu/"
-        - "mirrors.aliyun.com/ubuntu/"
-        - "mirrors.cloud.tencent.com/ubuntu/"
-        - "mirrors.huaweicloud.com/repository/ubuntu/"
-        - "mirrors.163.com/ubuntu/"
+        - "http://fr.archive.ubuntu.com/ubuntu/"
+        - "http://mirrors.ircam.fr/pub/ubuntu/"
+        - "http://ubuntu.mirrors.ovh.net/ubuntu/"
       custom: []
-    aliases:
-      tsinghua: "mirrors.tuna.tsinghua.edu.cn/ubuntu/"
-      ustc: "mirrors.ustc.edu.cn/ubuntu/"
-      aliyun: "mirrors.aliyun.com/ubuntu/"
-      tencent: "mirrors.cloud.tencent.com/ubuntu/"
-      163: "mirrors.163.com/ubuntu/"
-      huaweicloud: "mirrors.huaweicloud.com/repository/ubuntu/"
 
   - id: ubuntu-ports
     name: Ubuntu Ports
     type: 2
     url_pattern: "/ubuntu-ports/(.+)$"
-    benchmark_url: "dists/noble/InRelease/Release"
-    geo_mirror_api: "http://mirrors.ubuntu.com/mirrors.txt"
+    benchmark_url: "dists/noble/InRelease"
     cache_rules:
       - pattern: "deb$"
         cache_control: "max-age=100000"
@@ -131,22 +87,16 @@ distributions:
         rewrite: true
     mirrors:
       official:
-        - "mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/"
-        - "mirrors.ustc.edu.cn/ubuntu-ports/"
-        - "mirrors.aliyun.com/ubuntu-ports/"
-        - "mirrors.cloud.tencent.com/ubuntu-ports/"
+        - "http://ports.ubuntu.com/ubuntu-ports/"
+        - "https://mirrors.dotsrc.org/ubuntu-ports/"
+        - "http://mirror.yandex.ru/ubuntu-ports/"
       custom: []
-    aliases:
-      tsinghua: "mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/"
-      ustc: "mirrors.ustc.edu.cn/ubuntu-ports/"
-      aliyun: "mirrors.aliyun.com/ubuntu-ports/"
-      tencent: "mirrors.cloud.tencent.com/ubuntu-ports/"
 
   - id: debian
     name: Debian
     type: 3
-    url_pattern: "/debian(-security)?/(.+)$"
-    benchmark_url: "dists/bullseye/main/binary-amd64/Release"
+    url_pattern: "/debian/(.+)$"
+    benchmark_url: "dists/bookworm/main/binary-amd64/Release"
     cache_rules:
       - pattern: "deb$"
         cache_control: "max-age=100000"
@@ -183,20 +133,56 @@ distributions:
         rewrite: true
     mirrors:
       official:
-        - "http://ftp.cn.debian.org/debian/"
-        - "mirrors.tuna.tsinghua.edu.cn/debian/"
-        - "mirrors.ustc.edu.cn/debian/"
-        - "mirrors.163.com/debian/"
-      custom:
-        - "mirrors.aliyun.com/debian/"
-        - "mirrors.cloud.tencent.com/debian/"
-        - "mirrors.huaweicloud.com/debian/"
-    aliases:
-      tsinghua: "mirrors.tuna.tsinghua.edu.cn/debian/"
-      ustc: "mirrors.ustc.edu.cn/debian/"
-      aliyun: "mirrors.aliyun.com/debian/"
-      tencent: "mirrors.cloud.tencent.com/debian/"
-      163: "mirrors.163.com/debian/"
+        - "http://ftp.fr.debian.org/debian/"
+        - "http://deb.debian.org/debian/"
+        - "http://ftp.rezopole.net/debian/"
+      custom: []
+
+  - id: debian-security
+    name: Debian Security
+    type: 6
+    url_pattern: "/debian-security/(.+)$"
+    benchmark_url: "dists/bookworm-security/main/binary-amd64/Release"
+    cache_rules:
+      - pattern: "deb$"
+        cache_control: "max-age=100000"
+        rewrite: true
+      - pattern: "udeb$"
+        cache_control: "max-age=100000"
+        rewrite: true
+      - pattern: "InRelease$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: "DiffIndex$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: "PackagesIndex$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: "Packages\\.(bz2|gz|lzma)$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: "SourcesIndex$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: "Sources\\.(bz2|gz|lzma)$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: "Release(\\.gpg)?$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: "Translation-(en|fr)\\.(gz|bz2|bzip2|lzma)$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: "/by-hash/"
+        cache_control: "max-age=3600"
+        rewrite: true
+    mirrors:
+      official:
+        - "http://ftp.fr.debian.org/debian-security/"
+        - "http://deb.debian.org/debian-security/"
+        - "http://security.debian.org/debian-security/"
+      custom: []
 
   - id: centos
     name: CentOS
@@ -224,18 +210,10 @@ distributions:
         rewrite: true
     mirrors:
       official:
-        - "mirrors.tuna.tsinghua.edu.cn/centos/"
-        - "mirrors.ustc.edu.cn/centos/"
-        - "mirrors.aliyun.com/centos/"
-        - "mirrors.163.com/centos/"
-        - "mirrors.huaweicloud.com/centos/"
+        - "http://mirror.centos.org/centos/"
+        - "http://centos.mirrors.ovh.net/ftp.centos.org/"
+        - "http://centos.mirrors.proxad.net/centos/"
       custom: []
-    aliases:
-      tsinghua: "mirrors.tuna.tsinghua.edu.cn/centos/"
-      ustc: "mirrors.ustc.edu.cn/centos/"
-      aliyun: "mirrors.aliyun.com/centos/"
-      163: "mirrors.163.com/centos/"
-      huaweicloud: "mirrors.huaweicloud.com/centos/"
 
   - id: alpine
     name: Alpine Linux
@@ -257,11 +235,60 @@ distributions:
         rewrite: true
     mirrors:
       official:
-        - "mirrors.tuna.tsinghua.edu.cn/alpine/"
-        - "mirrors.ustc.edu.cn/alpine/"
-        - "mirrors.aliyun.com/alpine/"
+        - "http://dl-cdn.alpinelinux.org/alpine/"
+        - "http://mirrors.ircam.fr/pub/alpine/"
+        - "https://uk.alpinelinux.org/alpine/"
       custom: []
-    aliases:
-      tsinghua: "mirrors.tuna.tsinghua.edu.cn/alpine/"
-      ustc: "mirrors.ustc.edu.cn/alpine/"
-      aliyun: "mirrors.aliyun.com/alpine/"
+
+  - id: rocky
+    name: Rocky Linux
+    type: 7
+    url_pattern: "/rocky/(.+)$"
+    benchmark_url: "RPM-GPG-KEY-Rocky-9"
+    cache_rules:
+      - pattern: "repomd.xml$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: "filelist.gz$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: "dir_sizes$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: "timestamp.txt$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: ".*"
+        cache_control: "max-age=100000"
+        rewrite: true
+    mirrors:
+      official:
+        - "https://dl.rockylinux.org/pub/rocky/"
+        - "https://rockylinux.mirrors.ovh.net/"
+        - "https://mirror.rackspace.com/rocky/"
+      custom: []
+
+  - id: fedora
+    name: Fedora
+    type: 8
+    url_pattern: "/fedora/(.+)$"
+    benchmark_url: "releases/"
+    cache_rules:
+      - pattern: "repodata/.*\\.(xml|xml.gz|xml.xz|json)$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: "Packages/.*\\.rpm$"
+        cache_control: "max-age=86400"
+        rewrite: true
+      - pattern: ".*timestamp.txt$"
+        cache_control: "max-age=3600"
+        rewrite: true
+      - pattern: ".*"
+        cache_control: "max-age=3600"
+        rewrite: true
+    mirrors:
+      official:
+        - "https://mirrors.ircam.fr/pub/fedora/linux/"
+        - "https://mirror.in2p3.fr/linux/fedora/"
+        - "https://ftp.lip6.fr/pub/linux/distributions/fedora/"
+      custom: []

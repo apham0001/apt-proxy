@@ -32,7 +32,7 @@ const (
 )
 
 // DistributionName returns the distribution ID string for the given type.
-// Returns empty string for unknown types.
+// Returns empty string for unknown types. Checks registry for dynamic distros.
 func DistributionName(distType int) string {
 	switch distType {
 	case TYPE_LINUX_DISTROS_UBUNTU:
@@ -46,6 +46,12 @@ func DistributionName(distType int) string {
 	case TYPE_LINUX_DISTROS_ALPINE:
 		return LINUX_DISTROS_ALPINE
 	default:
+		// Check registry for dynamically loaded distros
+		if reg := GetRegistry(); reg != nil {
+			if d, ok := reg.GetByType(distType); ok {
+				return d.Name
+			}
+		}
 		return ""
 	}
 }

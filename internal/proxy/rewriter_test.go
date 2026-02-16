@@ -85,13 +85,13 @@ func TestRefreshRewriters(t *testing.T) {
 		t.Fatal("CreateNewRewriters() returned nil")
 	}
 
-	if rewriters.Ubuntu == nil {
+	if getRewriter(rewriters, distro.TYPE_LINUX_DISTROS_UBUNTU) == nil {
 		t.Error("Initial Ubuntu rewriter is nil")
 	}
 
 	RefreshRewriters(rewriters, distro.TYPE_LINUX_ALL_DISTROS)
 
-	if rewriters.Ubuntu == nil {
+	if getRewriter(rewriters, distro.TYPE_LINUX_DISTROS_UBUNTU) == nil {
 		t.Error("Ubuntu rewriter is nil after refresh")
 	}
 }
@@ -224,11 +224,12 @@ func TestURLRewriterPattern(t *testing.T) {
 	defer cleanupTestMirrors()
 
 	rewriters := CreateNewRewriters(distro.TYPE_LINUX_DISTROS_UBUNTU)
-	if rewriters.Ubuntu == nil {
+	ubuntuRW := getRewriter(rewriters, distro.TYPE_LINUX_DISTROS_UBUNTU)
+	if ubuntuRW == nil {
 		t.Fatal("Ubuntu rewriter is nil")
 	}
 
-	if rewriters.Ubuntu.pattern == nil {
+	if ubuntuRW.pattern == nil {
 		t.Error("Ubuntu rewriter pattern is nil")
 	}
 
@@ -242,7 +243,7 @@ func TestURLRewriterPattern(t *testing.T) {
 
 	for _, tt := range testPaths {
 		testURL, _ := url.Parse("http://localhost" + tt.path)
-		matched := rewriters.Ubuntu.pattern.MatchString(testURL.String())
+		matched := ubuntuRW.pattern.MatchString(testURL.String())
 		if matched != tt.match {
 			t.Errorf("pattern.MatchString(%q) = %v, want %v", tt.path, matched, tt.match)
 		}

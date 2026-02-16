@@ -317,8 +317,8 @@ func (s *Server) createFiberApp() *fiber.App {
 		c.Status(status)
 		return c.SendString(tpl)
 	})
-	// All other paths -> proxy + cache
-	app.All("/*", adaptor.HTTPHandler(s.proxy.Handler))
+	// All other paths -> proxy + cache (uses PackageStruct which handles URL rewriting)
+	app.All("/*", adaptor.HTTPHandler(s.proxy))
 
 	return app
 }
