@@ -11,7 +11,6 @@ const ALPINE_BENCHMAKR_URL = "MIRRORS.txt"
 var ALPINE_OFFICIAL_MIRRORS = []string{
 	"http://dl-cdn.alpinelinux.org/alpine/",
 	"http://mirrors.ircam.fr/pub/alpine/",
-	"mirrors.tuna.tsinghua.edu.cn/alpine/",
 }
 
 var ALPINE_CUSTOM_MIRRORS = []string{}

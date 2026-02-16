@@ -23,7 +23,7 @@ func TestRuleToString(t *testing.T) {
 }
 
 func TestGenerateAliasFromURL(t *testing.T) {
-	if Define.GenerateAliasFromURL("http://mirrors.cn99.com/ubuntu/") != "cn:cn99" {
+	if Define.GenerateAliasFromURL("http://mirrors.cn99.com/ubuntu/") != "com:cn99" {
 		t.Fatal("generate alias from url failed")
 	}
 

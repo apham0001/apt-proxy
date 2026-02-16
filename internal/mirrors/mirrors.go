@@ -62,16 +62,7 @@ func GetGeoMirrorUrlsByMode(mode int) (mirrors []string) {
 	}
 
 	if mode == Define.TYPE_LINUX_DISTROS_UBUNTU_PORTS {
-		ubuntuPortsMirrorsOnline, err := GetUbuntuMirrorUrlsByGeo()
-		if err != nil {
-			return BUILDIN_UBUNTU_PORTS_MIRRORS
-		}
-
-		results := make([]string, 0, len(ubuntuPortsMirrorsOnline))
-		for _, mirror := range ubuntuPortsMirrorsOnline {
-			results = append(results, strings.ReplaceAll(mirror, "/ubuntu/", "/ubuntu-ports/"))
-		}
-		return results
+		return BUILDIN_UBUNTU_PORTS_MIRRORS
 	}
 
 	if mode == Define.TYPE_LINUX_DISTROS_DEBIAN {

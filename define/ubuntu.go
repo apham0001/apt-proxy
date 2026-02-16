@@ -16,7 +16,6 @@ var UBUNTU_HOST_PATTERN = regexp.MustCompile(`/ubuntu/(.+)$`)
 var UBUNTU_OFFICIAL_MIRRORS = []string{
 	"http://fr.archive.ubuntu.com/ubuntu/",
 	"http://mirrors.ircam.fr/pub/ubuntu/",
-	"mirrors.tuna.tsinghua.edu.cn/ubuntu/",
 }
 
 var UBUNTU_CUSTOM_MIRRORS = []string{}

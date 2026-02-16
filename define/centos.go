@@ -14,7 +14,6 @@ var CENTOS_OFFICIAL_MIRRORS = []string{
 	"http://centos.mirrors.ovh.net/ftp.centos.org/",
 	"http://ftp.rezopole.net/centos/",
 	"http://mirror.ibcp.fr/pub/centos/",
-	"mirrors.tuna.tsinghua.edu.cn/centos/",
 }
 
 var CENTOS_CUSTOM_MIRRORS = []string{}

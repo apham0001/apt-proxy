@@ -6,7 +6,7 @@ import (
 
 const (
 	UBUNTU_PORTS_GEO_MIRROR_API = "http://mirrors.ubuntu.com/mirrors.txt"
-	UBUNTU_PORTS_BENCHMAKR_URL  = "dists/noble/InRelease/Release"
+	UBUNTU_PORTS_BENCHMAKR_URL  = "dists/noble/InRelease"
 )
 
 var UBUNTU_PORTS_HOST_PATTERN = regexp.MustCompile(`/ubuntu-ports/(.+)$`)
@@ -14,9 +14,7 @@ var UBUNTU_PORTS_HOST_PATTERN = regexp.MustCompile(`/ubuntu-ports/(.+)$`)
 // http://mirrors.ubuntu.com/mirrors.txt 2022.11.19
 // Sites that contain protocol headers, restrict access to resources using that protocol
 var UBUNTU_PORTS_OFFICIAL_MIRRORS = []string{
-	"http://mirrors.ircam.fr/pub/ubuntu-ports/",
-	"http://fr.archive.ubuntu.com/ubuntu-ports/",
-	"mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/",
+	"http://ports.ubuntu.com/ubuntu-ports/",
 }
 
 var UBUNTU_PORTS_CUSTOM_MIRRORS = []string{}

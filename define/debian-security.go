@@ -12,7 +12,6 @@ var DEBIAN_SECURITY_OFFICIAL_MIRRORS = []string{
 	"http://ftp.fr.debian.org/debian-security/",
 	"http://deb.debian.org/debian-security/",
 	"http://ftp.rezopole.net/debian-security/",
-	"mirrors.tuna.tsinghua.edu.cn/debian-security/",
 }
 
 var DEBIAN_SECURITY_CUSTOM_MIRRORS = []string{}

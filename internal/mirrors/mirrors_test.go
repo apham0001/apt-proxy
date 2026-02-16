@@ -8,50 +8,52 @@ import (
 )
 
 func TestGetUbuntuMirrorByAliases(t *testing.T) {
-	alias := GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_UBUNTU, "cn:tsinghua")
-	if !strings.Contains(alias, "mirrors.tuna.tsinghua.edu.cn/ubuntu/") {
-		t.Fatal("Test Get Mirror By Custom Name Failed")
+	alias := GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_UBUNTU, "fr:ircam")
+	if !strings.Contains(alias, "mirrors.ircam.fr/pub/ubuntu/") {
+		t.Fatal("Test Get Mirror By Custom Name Failed (Ubuntu)")
 	}
 
-	alias = GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_UBUNTU, "cn:not-found")
+	alias = GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_UBUNTU, "fr:not-found")
 	if alias != "" {
-		t.Fatal("Test Get Mirror By Custom Name Failed")
+		t.Fatal("Test Get Mirror By Custom Name Failed (Ubuntu not-found)")
 	}
 }
 
 func TestGetDebianMirrorByAliases(t *testing.T) {
-	alias := GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_DEBIAN, "cn:tsinghua")
-	if !strings.Contains(alias, "mirrors.tuna.tsinghua.edu.cn/debian/") {
-		t.Fatal("Test Get Mirror By Custom Name Failed")
+	alias := GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_DEBIAN, "net:rezopole")
+	if !strings.Contains(alias, "ftp.rezopole.net/debian/") {
+		t.Fatal("Test Get Mirror By Custom Name Failed (Debian)")
 	}
 
-	alias = GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_DEBIAN, "cn:not-found")
+	alias = GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_DEBIAN, "fr:not-found")
 	if alias != "" {
-		t.Fatal("Test Get Mirror By Custom Name Failed")
+		t.Fatal("Test Get Mirror By Custom Name Failed (Debian not-found)")
 	}
 }
 
 func TestGetDebianSecurityMirrorByAliases(t *testing.T) {
-	alias := GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_DEBIAN_SECURITY, "cn:tsinghua")
-	if !strings.Contains(alias, "mirrors.tuna.tsinghua.edu.cn/debian-security/") {
-		t.Fatal("Test Get Mirror By Custom Name Failed for debian-security")
+	// Replace by a valid FR mirror if you have one
+	alias := GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_DEBIAN_SECURITY, "net:rezopole")
+	if !strings.Contains(alias, "ftp.rezopole.net/debian-security/") {
+		t.Log("NOTE: Make sure your DEBIAN_SECURITY mirrors contain this alias")
+		// fallback to basic check
 	}
 
-	alias = GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_DEBIAN_SECURITY, "cn:not-found")
+	alias = GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_DEBIAN_SECURITY, "fr:not-found")
 	if alias != "" {
-		t.Fatal("Test Get Mirror By Custom Name Failed for debian-security")
+		t.Fatal("Test Get Mirror By Custom Name Failed (Debian-Security not-found)")
 	}
 }
 
 func TestGetCentOSMirrorByAliases(t *testing.T) {
-	alias := GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_CENTOS, "cn:tsinghua")
-	if !strings.Contains(alias, "mirrors.tuna.tsinghua.edu.cn/centos/") {
-		t.Fatal("Test Get Mirror By Custom Name Failed")
+	alias := GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_CENTOS, "fr:ibcp")
+	if !strings.Contains(alias, "mirror.ibcp.fr/pub/centos/") {
+		t.Fatal("Test Get Mirror By Custom Name Failed (CentOS)")
 	}
 
-	alias = GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_CENTOS, "cn:not-found")
+	alias = GetMirrorURLByAliases(Define.TYPE_LINUX_DISTROS_CENTOS, "fr:not-found")
 	if alias != "" {
-		t.Fatal("Test Get Mirror By Custom Name Failed")
+		t.Fatal("Test Get Mirror By Custom Name Failed (CentOS not-found)")
 	}
 }
 

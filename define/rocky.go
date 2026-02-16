@@ -4,7 +4,7 @@ import "regexp"
 
 var ROCKY_HOST_PATTERN = regexp.MustCompile(`/rocky/(.+)$`)
 
-const ROCKY_BENCHMAKR_URL = "TIME"
+const ROCKY_BENCHMAKR_URL = "RPM-GPG-KEY-Rocky-9"
 
 // https://mirrors.rockylinux.org/ 2022.11.19
 // Official Rocky Linux mirrors

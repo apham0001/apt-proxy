@@ -53,9 +53,27 @@ type UrlWithAlias struct {
 
 func GenerateAliasFromURL(url string) string {
 	pureHost := regexp.MustCompile(`^https?://|\/.*`).ReplaceAllString(url, "")
-	tldRemoved := regexp.MustCompile(`\.edu\.cn$|.cn$|\.com$|\.net$|\.net.cn$|\.org$|\.org\.cn$`).ReplaceAllString(pureHost, "")
-	group := strings.Split(tldRemoved, ".")
-	return "cn:" + group[len(group)-1]
+	parts := strings.Split(pureHost, ".")
+	if len(parts) < 2 {
+		return pureHost
+	}
+
+	tld := parts[len(parts)-1]
+	nameIdx := len(parts) - 2
+
+	// Handle multi-part country TLDs (e.g., .edu.cn, .net.cn, .org.cn, .ac.za)
+	if len(parts) >= 3 {
+		secondLevel := parts[len(parts)-2]
+		if secondLevel == "edu" || secondLevel == "net" || secondLevel == "org" || secondLevel == "ac" || secondLevel == "co" {
+			nameIdx = len(parts) - 3
+		}
+	}
+
+	if nameIdx < 0 {
+		nameIdx = 0
+	}
+
+	return tld + ":" + parts[nameIdx]
 }
 
 func GenerateBuildInMirorItem(url string, official bool) UrlWithAlias {

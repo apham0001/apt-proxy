@@ -14,7 +14,6 @@ var DEBIAN_OFFICIAL_MIRRORS = []string{
 	"http://ftp.fr.debian.org/debian/",
 	"http://deb.debian.org/debian/",
 	"http://ftp.rezopole.net/debian/",
-	"mirrors.tuna.tsinghua.edu.cn/debian/",
 }
 
 var DEBIAN_CUSTOM_MIRRORS = []string{}

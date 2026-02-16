@@ -4,12 +4,11 @@ import "regexp"
 
 var FEDORA_HOST_PATTERN = regexp.MustCompile(`/fedora/(.+)$`)
 
-const FEDORA_BENCHMAKR_URL = "TIME"
+const FEDORA_BENCHMAKR_URL = "releases/41/Everything/x86_64/os/media.repo"
 
 // https://mirrors.fedoraproject.org/ 2022.11.19
 // Official Fedora mirrors
 var FEDORA_OFFICIAL_MIRRORS = []string{
-	"https://download.fedoraproject.org/pub/fedora/linux/",
 	"https://mirror.ufs.ac.za/fedora/",
 	"http://ftp.nluug.nl/pub/os/Linux/distr/fedora/",
 }
