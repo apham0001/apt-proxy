@@ -27,6 +27,8 @@ dockers:
     dockerfile: docker/Dockerfile.gorelease
     use: buildx
     goarch: amd64
+    extra_files:
+      - config/distributions.yaml
     build_flag_templates:
       - "--pull"
       - "--provenance=false"
@@ -49,6 +51,8 @@ dockers:
     goos: linux
     goarch: arm64
     goarm: ''
+    extra_files:
+      - config/distributions.yaml
     build_flag_templates:
       - "--pull"
       - "--provenance=false"
@@ -71,6 +75,8 @@ dockers:
     goos: linux
     goarch: arm
     goarm: "7"
+    extra_files:
+      - config/distributions.yaml
     build_flag_templates:
       - "--pull"
       - "--provenance=false"

@@ -4,5 +4,6 @@ RUN apt update && apt install -y ca-certificates
 FROM scratch
 COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY apt-proxy /usr/bin/apt-proxy
+COPY config/distributions.yaml /etc/apt-proxy/distributions.yaml
 EXPOSE 3142/tcp
 ENTRYPOINT ["/usr/bin/apt-proxy"]
